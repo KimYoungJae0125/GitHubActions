@@ -37,7 +37,8 @@ jobs:
           fi
           cd auto-commit
           sudo timedatectl set-timezone Asia/Seoul
-          date >> $(date "+%Y-%m-%d %I시 %M분 %S초").txt
+          echo $(date)
+          date >> $(date "+%Y-%m-%d %H시 %M분 %S초").txt
           git add .
           git config --global user.email "uni0125@naver.com"
           git config --global user.name "kyj"
