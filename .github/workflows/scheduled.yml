@@ -22,6 +22,9 @@ jobs:
       - name: Add date and push
         run: |
           cd GitHubActions
+          if [ ! -d auto-commit ]; then
+            mkdir auto-commit
+          fi
           cd auto-commit
           date >> $(date "+%Y-%m-%d-%I-%M-%S").txt
           git add .
