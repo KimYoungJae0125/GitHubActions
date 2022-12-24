@@ -3,6 +3,16 @@ name: Scheduled Jobs
 on:
   schedule:
     - cron: '20 * * * *'
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Person"
+        required: true
+        default: "kyj"
+      home:
+        description: "location"
+        required: false
+        default: "GitHubActions"
 
 jobs:
   auto-commit:
