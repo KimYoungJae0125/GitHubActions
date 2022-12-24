@@ -17,7 +17,7 @@ jobs:
         with:
           repository: ${{ github.repository }}
           token: ${{ secrets.MY_GITHUB_TOKEN }}
-          path: GitHubActions/auto-commit
+          path: GitHubActions
 
       - name: Add date and push
         run: |
