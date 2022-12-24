@@ -32,15 +32,39 @@ jobs:
       - name: Add date and push
         run: |
           cd GitHubActions
-          if [ ! -d auto-commit ]; then
-            mkdir auto-commit
+          
+          MAIN_FOLDER="auto-commit"
+          if [ ! -d "$MAIN_FOLDER" ]; then
+            mkdir "$MAIN_FOLDER"
           fi
-          cd auto-commit
+          cd "$MAIN_FOLDER"
+          
+          YEAR=$(date "+%Y")
+          if [ ! -d "$YEAR" ]; then
+            mkdir "$YEAR"
+          fi
+          cd "$YEAR"
+          
+          MONTH=$(date "+%m")
+          if [ ! -d "$MONTH" ]; then
+            mkdir "$MONTH"
+          fi
+          cd "$MONTH"
+          
+          DAY=$(date "+%d")
+          if [ ! -d "$DAY" ]; then
+            mkdir "$DAY"
+          fi
+          cd "$DAY"
+          
           sudo timedatectl set-timezone Asia/Seoul
+          
           echo $(date)
-          date >> $(date "+%Y-%m-%d_%H시_%M분_%S초").txt
+          NOW=$(date "+%Y-%m-%d_%H시_%M분_%S초")
+          date >> "$NOW".txt
+          
           git add .
           git config --global user.email "uni0125@naver.com"
           git config --global user.name "kyj"
-          git commit -am "$(date) commit and push"
+          git commit -am "$NOW commit and push"
           git push
