@@ -26,7 +26,8 @@ jobs:
             mkdir auto-commit
           fi
           cd auto-commit
-          date >> $(date "+%Y-%m-%d-%I-%M-%S").txt
+          timedatectl set-timezone Asia/Seoul
+          date >> $(date "+%Y-%m-%d %I시 %M분 %S초").txt
           git add .
           git config --global user.email "uni0125@naver.com"
           git config --global user.name "kyj"
