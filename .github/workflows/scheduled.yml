@@ -1,0 +1,31 @@
+name: Scheduled Jobs
+
+on:
+  schedule:
+    - cron: '20 * * * *'
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: echo repository name
+        run: echo "${{ github.repository }}"
+
+      - name: repository checkout
+        uses: actions/checkout@v3 # https://github.com/actions/checkout
+        with:
+          repository: ${{ github.repository }}
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
+          path: GitHubActions/auto-commit
+
+      - name: Add date and push
+        run: |
+          cd GitHubActions
+          cd auto-commit
+          date >> $(date "+%Y-%m-%d-%I-%M-%S").txt
+          git add .
+          git config --global user.email "uni0125@naver.com"
+          git config --global user.name "kyj"
+          git commit -am "$(date) commit and push"
+          git push
